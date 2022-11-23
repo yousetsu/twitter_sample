@@ -8,7 +8,6 @@ void main() {
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,35 +20,26 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
-
   //ツイートするメソッド
   void tweet() async {
     final Map<String, dynamic> tweetParameters = {
       "text": '1行目 test1\n2行目 test2',
       "url": 'https://computer.sarujincanon.com',
-      "hashtags": 'test1,test2',
+      "hashtags": 'アプリ開発,ブログ書け',
     };
     //URIスキームを使ってtwitterに接続
     final Uri tweetScheme =
     Uri(scheme: "twitter", host: "post", queryParameters: tweetParameters);
 
-    //直接ブラウザからURLに接続
-    final Uri tweetIntentUrl =
-    Uri.https("twitter.com", "/intent/tweet", tweetParameters);
-
     //Twitter呼び出し
-    await canLaunchUrlString(tweetScheme.toString())//アプリ起動できるか確認
-        ? await launchUrlString(tweetScheme.toString())//アプリ起動
-        : await launchUrlString(tweetIntentUrl.toString());//ブラウザ起動
+    await launchUrlString(tweetScheme.toString());//アプリ起動
   }
   @override
   Widget build(BuildContext context) {
